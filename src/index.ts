@@ -2,21 +2,31 @@ import express from 'express';
 import { config } from 'dotenv'
 import { GetUsersController } from './controllers/getUsers/getUsers';
 import { PostgresGetUsersRepository } from './repositories/getUsers/postgres-get-users';
+import { PostgresClient } from './database/postgres';
 
-config();
-const app = express();
 
-const port = process.env.PORT || 8000;
+const main = async () => {
+    config();
+    const app = express();
 
-app.get('/users', async (req, res) => {
-    const postgresGetUsersRepository = new PostgresGetUsersRepository();
-    const getUsersController = new GetUsersController(postgresGetUsersRepository);
+    await PostgresClient.connect();
 
-    const { body, statusCode } = await getUsersController.handler();
+    app.get('/users', async (req, res) => {
+        const postgresGetUsersRepository = new PostgresGetUsersRepository();
+        const getUsersController = new GetUsersController(postgresGetUsersRepository);
 
-    res.send(body).status(statusCode);
-});
+        const { body, statusCode } = await getUsersController.handler();
 
-app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
-});
+        res.send(body).status(statusCode);
+    });
+
+    const port = process.env.PORT || 8000;
+
+    app.listen(port, () => {
+        console.log(`Servidor rodando em http://localhost:${port}`);
+    });
+};
+
+main();
+
+
