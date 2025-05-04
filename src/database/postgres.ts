@@ -8,7 +8,7 @@ export const PostgresClient = {
         const port = parseInt(process.env.POSTGRES_PORT || "5432", 10);
         const user = process.env.POSTGRES_USER || "postgres";
         const password = process.env.POSTGRES_PASSWORD || "admin";
-        const database = process.env.POSTGRES_DB || "stock_box";
+        const database = process.env.POSTGRES_DB || "users-db";
 
         const client = new Client({
             host,
