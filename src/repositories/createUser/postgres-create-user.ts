@@ -4,7 +4,7 @@ import { User } from "../../models/user";
 
 const prisma = new PrismaClient();
 
-export class PostgresCreateUser implements ICreateUserRepository {
+export class PostgresCreateUserRepository implements ICreateUserRepository {
     async createUser(params: CreateUserParams): Promise<User> {
         try {
             const user = await prisma.user.create({

@@ -3,11 +3,14 @@ import { config } from 'dotenv'
 import { GetUsersController } from './controllers/getUsers/getUsers';
 import { PostgresGetUsersRepository } from './repositories/getUsers/postgres-get-users';
 import { PostgresClient } from './database/postgres';
+import { PostgresCreateUserRepository } from './repositories/createUser/postgres-create-user';
+import { CreateUserController } from './controllers/createUser/createUser';
 
 
 const main = async () => {
     config();
     const app = express();
+    app.use(express.json());
 
     await PostgresClient.connect();
 
@@ -19,6 +22,15 @@ const main = async () => {
 
         res.send(body).status(statusCode);
     });
+
+    app.post('/users', async (req, res) => {
+        const postgresCreateUserRepository = new PostgresCreateUserRepository();
+        const createUserController = new CreateUserController(postgresCreateUserRepository);
+
+        const { body, statusCode } = await createUserController.handle({ body: req.body });
+
+        res.send(body).status(statusCode);
+    })
 
     const port = process.env.PORT || 8000;
 
