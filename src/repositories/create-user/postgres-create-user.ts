@@ -1,6 +1,6 @@
-import { CreateUserParams, ICreateUserRepository } from "../../controllers/createUser/protocols";
+import { CreateUserParams, ICreateUserRepository } from "../../controllers/create-user/protocols";
 import { PrismaClient } from "../../generated/prisma";
-import { User } from "../../models/user";
+import { User } from "../../models/user/user";
 
 const prisma = new PrismaClient();
 

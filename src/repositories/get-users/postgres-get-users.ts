@@ -1,7 +1,7 @@
-import { IGetUsersRepository } from "../../controllers/getUsers/protocols";
+import { IGetUsersRepository } from "../../controllers/get-users/protocols";
 import { PostgresClient } from "../../database/postgres";
 import { PrismaClient } from "../../generated/prisma";
-import { User } from "../../models/user";
+import { User } from "../../models/user/user";
 
 const prisma = new PrismaClient();
 

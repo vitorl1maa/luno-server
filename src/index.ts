@@ -1,10 +1,10 @@
 import express from 'express';
 import { config } from 'dotenv'
-import { GetUsersController } from './controllers/getUsers/getUsers';
-import { PostgresGetUsersRepository } from './repositories/getUsers/postgres-get-users';
+import { GetUsersController } from './controllers/get-users/get-users';
+import { PostgresGetUsersRepository } from './repositories/get-users/postgres-get-users';
 import { PostgresClient } from './database/postgres';
-import { PostgresCreateUserRepository } from './repositories/createUser/postgres-create-user';
-import { CreateUserController } from './controllers/createUser/createUser';
+import { PostgresCreateUserRepository } from './repositories/create-user/postgres-create-user';
+import { CreateUserController } from './controllers/create-user/create-user';
 
 
 const main = async () => {
@@ -29,7 +29,7 @@ const main = async () => {
 
         const { body, statusCode } = await createUserController.handle({ body: req.body });
 
-        res.send(body).status(statusCode);
+        res.status(statusCode).send(body);
     })
 
     const port = process.env.PORT || 8000;

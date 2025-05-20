@@ -160,7 +160,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:admin@localhost:5432/mydb?schema=public"
+        "value": "postgresql://postgres:admin@localhost:5432/postgres"
       }
     }
   },

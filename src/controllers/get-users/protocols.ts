@@ -1,4 +1,4 @@
-import { User } from "../../models/user"
+import { User } from "../../models/user/user"
 import { HttpResponse } from "../protocols"
 
 export interface IGetUsersController {

@@ -14,6 +14,7 @@
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",
     "@types/pg": "^8.11.14",
+    "@types/validator": "^13.15.1",
     "dotenv": "^16.5.0",
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^10.1.2",
@@ -29,6 +30,7 @@
     "@prisma/client": "6.7.0",
     "express": "^5.1.0",
     "pg": "^8.15.6",
-    "prisma": "^6.7.0"
+    "prisma": "^6.7.0",
+    "validator": "^13.15.0"
   }
 }

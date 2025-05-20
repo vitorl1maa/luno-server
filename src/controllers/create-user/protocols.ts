@@ -1,4 +1,4 @@
-import { User } from "../../models/user";
+import { User } from "../../models/user/user";
 import { HttpRequest, HttpResponse } from "../protocols";
 
 export interface ICreateUserController {
