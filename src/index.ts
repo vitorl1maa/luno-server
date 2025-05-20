@@ -1,10 +1,10 @@
 import express from 'express';
 import { config } from 'dotenv'
-import { GetUsersController } from './controllers/get-users/get-users';
-import { PostgresGetUsersRepository } from './repositories/get-users/postgres-get-users';
+import { GetUsersController } from './controllers/user/get-users/get-users';
+import { PostgresGetUsersRepository } from './repositories/user/get-users/postgres-get-users';
 import { PostgresClient } from './database/postgres';
-import { PostgresCreateUserRepository } from './repositories/create-user/postgres-create-user';
-import { CreateUserController } from './controllers/create-user/create-user';
+import { CreateUserController } from './controllers/user/create-user/create-user';
+import { PostgresCreateUserRepository } from './repositories/user/create-user/postgres-create-user';
 
 
 const main = async () => {
