@@ -1,21 +1,50 @@
-import { PrismaClient } from "../../../generated/prisma";
 import { User } from "../../../models/user/user";
-import { IUpdateUserRepository, UpdateUserParams } from "./protocols";
+import { HttpRequest, HttpResponse } from "../../protocols";
+import { IUpdateUserController, IUpdateUserRepository, UpdateUserParams } from "./protocols";
 
-const prisma = new PrismaClient();
+export class UpdateUserController implements IUpdateUserController {
+    constructor(private readonly updateUserRepository: IUpdateUserRepository) { }
+    async handler(httpRequest: HttpRequest<any>): Promise<HttpResponse<User>> {
+        try {
+            const id = httpRequest?.params?.id;
+            const body = httpRequest?.body;
 
-export class PostgresUpdateUserRepository implements IUpdateUserRepository {
-    async updateUser(id: number, params: UpdateUserParams): Promise<User> {
-        const user = await prisma.user.findUnique({ where: { id: Number(id) } });
+            if (!id) {
+                return {
+                    statusCode: 400,
+                    body: 'Missing user id'
+                }
+            }
 
-        if (!user) {
-            throw new Error('User not updated');
+            const allowedFieldsToUpdate: (keyof UpdateUserParams)[] = [
+                "firstName",
+                "lastName",
+                "email",
+                "password"
+            ];
+
+            const someFieldIsNotAllowedToUpdate = Object.keys(body).some(
+                key => !allowedFieldsToUpdate.includes(key as keyof UpdateUserParams));
+
+            if (someFieldIsNotAllowedToUpdate) {
+                return {
+                    statusCode: 400,
+                    body: 'Some received field is not allowed'
+                }
+            }
+
+            const user = await this.updateUserRepository.updateUser(id, body)
+
+            return {
+                statusCode: 200,
+                body: user
+            }
+
+        } catch (error) {
+            return {
+                statusCode: 500,
+                body: 'Something went wrong.',
+            }
         }
-
-        const updateUser = await prisma.user.update({
-            where: { id: Number(id) },
-            data: { ...params, }
-        })
-        return updateUser as User;
     }
 }
