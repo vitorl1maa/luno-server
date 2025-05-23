@@ -4,7 +4,7 @@ import { IUpdateUserController, IUpdateUserRepository, UpdateUserParams } from "
 
 export class UpdateUserController implements IUpdateUserController {
     constructor(private readonly updateUserRepository: IUpdateUserRepository) { }
-    async handler(httpRequest: HttpRequest<any>): Promise<HttpResponse<User>> {
+    async handle(httpRequest: HttpRequest<any>): Promise<HttpResponse<User>> {
         try {
             const id = httpRequest?.params?.id;
             const body = httpRequest?.body;

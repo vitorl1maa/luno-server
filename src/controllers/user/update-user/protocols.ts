@@ -9,7 +9,7 @@ export interface UpdateUserParams {
 }
 
 export interface IUpdateUserController {
-    handler(httpRequest: HttpRequest<any>): Promise<HttpResponse<User>>
+    handle(httpRequest: HttpRequest<any>): Promise<HttpResponse<User>>
 }
 export interface IUpdateUserRepository {
     updateUser(id: number, params: UpdateUserParams): Promise<User>

@@ -7,6 +7,8 @@ import { CreateUserController } from './controllers/user/create-user/create-user
 import { PostgresCreateUserRepository } from './repositories/user/create-user/postgres-create-user';
 import { PostgresUpdateUserRepository } from './repositories/user/update-user/postgres-update-user';
 import { UpdateUserController } from './controllers/user/update-user/update-user';
+import { PostgresDeleteUserRepository } from './repositories/user/delete-user/postgres-delete-user';
+import { DeleteUserController } from './controllers/user/delete-user/delete-user';
 
 
 const main = async () => {
@@ -20,7 +22,7 @@ const main = async () => {
         const postgresGetUsersRepository = new PostgresGetUsersRepository();
         const getUsersController = new GetUsersController(postgresGetUsersRepository);
 
-        const { body, statusCode } = await getUsersController.handler();
+        const { body, statusCode } = await getUsersController.handle();
 
         res.send(body).status(statusCode);
     });
@@ -38,8 +40,20 @@ const main = async () => {
         const postgresUpdateUserRepository = new PostgresUpdateUserRepository();
         const updateUserController = new UpdateUserController(postgresUpdateUserRepository);
 
-        const { body, statusCode } = await updateUserController.handler({
+        const { body, statusCode } = await updateUserController.handle({
             body: req.body,
+            params: req.params
+        })
+
+        res.status(statusCode).send(body);
+    })
+
+
+    app.delete('/users/:id', async (req, res) => {
+        const postgresDeleteUserRepository = new PostgresDeleteUserRepository();
+        const deleteUserController = new DeleteUserController(postgresDeleteUserRepository);
+
+        const { body, statusCode } = await deleteUserController.handle({
             params: req.params
         })
 

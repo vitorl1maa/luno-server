@@ -5,7 +5,7 @@ export class GetUsersController implements IGetUsersController {
 
     }
 
-    async handler() {
+    async handle() {
         try {
             //validar req
             // direciona chamada para repository

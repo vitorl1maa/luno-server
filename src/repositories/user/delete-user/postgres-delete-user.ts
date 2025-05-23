@@ -18,7 +18,7 @@ export class PostgresDeleteUserRepository implements IDeleteUserRepository {
                     throw new Error(`User with id ${id} does not exist.`)
                 }
             }
-            throw new Error('Falied to delete user' + (error as Error).message);
+            throw new Error('Falied to delete user' + (error as Error).message)
         }
     }
 }
