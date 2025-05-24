@@ -6,6 +6,12 @@ export class PostgresGetUserByIdRepository {
             where: { id }
         });
 
-        return user;
+        if (!user) {
+            throw new Error("User not found");
+        }
+
+        const { password, ...userWithoutPassword } = user
+
+        return userWithoutPassword;
     }
 }

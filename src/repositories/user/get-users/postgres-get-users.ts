@@ -10,7 +10,9 @@ export class PostgresGetUsersRepository implements IGetUsersRepository {
     async getUsers(): Promise<User[]> {
         const users = await prisma.user.findMany();
 
-        return users
+        const usersWithoutPassword = users.map(({ password, ...user }) => user);
+
+        return usersWithoutPassword
 
     }
 
