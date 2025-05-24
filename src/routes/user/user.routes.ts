@@ -7,6 +7,8 @@ import { PostgresUpdateUserRepository } from "../../repositories/user/update-use
 import { UpdateUserController } from "../../controllers/user/update-user/update-user";
 import { PostgresDeleteUserRepository } from "../../repositories/user/delete-user/postgres-delete-user";
 import { DeleteUserController } from "../../controllers/user/delete-user/delete-user";
+import { PostgresGetUserByIdRepository } from "../../repositories/user/get-user-by-id/postgres-get-user-by-id";
+import { GetUserByIdController } from "../../controllers/user/get-user-by-id/get-user-by-id";
 
 const router = Router();
 
@@ -16,8 +18,19 @@ router.get('/users', async (req, res) => {
 
     const { body, statusCode } = await getUsersController.handle();
 
-    res.send(body).status(statusCode);
+    res.status(statusCode).send(body);
 });
+
+router.get('/users/:id', async (req, res) => {
+    const postgresGetUserByIdRepository = new PostgresGetUserByIdRepository();
+    const getUserByIdController = new GetUserByIdController(postgresGetUserByIdRepository);
+
+    const { body, statusCode } = await getUserByIdController.handle({
+        params: req.params
+    });
+
+    res.status(statusCode).send(body)
+})
 
 router.post('/users', async (req, res) => {
     const postgresCreateUserRepository = new PostgresCreateUserRepository();
