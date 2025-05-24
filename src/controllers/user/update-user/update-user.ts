@@ -1,26 +1,21 @@
 import { User } from "../../../models/user/user";
+import { badRequest, serverError, success } from "../../helpers/helpers";
 import { HttpRequest, HttpResponse, IController } from "../../protocols";
 import { IUpdateUserRepository, UpdateUserParams } from "./protocols";
 
 export class UpdateUserController implements IController {
     constructor(private readonly updateUserRepository: IUpdateUserRepository) { }
-    async handle(httpRequest: HttpRequest<UpdateUserParams>): Promise<HttpResponse<User>> {
+    async handle(httpRequest: HttpRequest<UpdateUserParams>): Promise<HttpResponse<User | string>> {
         try {
             const id = httpRequest?.params?.id;
             const body = httpRequest?.body;
 
             if (!body) {
-                return {
-                    statusCode: 400,
-                    body: "Missing fields"
-                }
+                return badRequest("Missing fields");
             }
 
             if (!id) {
-                return {
-                    statusCode: 400,
-                    body: 'Missing user id'
-                }
+                return badRequest("Missing user id");
             }
 
             const allowedFieldsToUpdate: (keyof UpdateUserParams)[] = [
@@ -34,24 +29,15 @@ export class UpdateUserController implements IController {
                 key => !allowedFieldsToUpdate.includes(key as keyof UpdateUserParams));
 
             if (someFieldIsNotAllowedToUpdate) {
-                return {
-                    statusCode: 400,
-                    body: 'Some received field is not allowed'
-                }
+                return badRequest('Some received field is not allowed');
             }
 
             const user = await this.updateUserRepository.updateUser(id, body)
 
-            return {
-                statusCode: 200,
-                body: user
-            }
+            return success<User>(user);
 
         } catch (error) {
-            return {
-                statusCode: 500,
-                body: 'Something went wrong.',
-            }
+            return serverError()
         }
     }
 }
