@@ -2,7 +2,7 @@ import express from 'express';
 import { config } from 'dotenv'
 import { PostgresClient } from './database/postgres';
 import userRoutes from './routes/user/user.routes';
-
+import loginRoutes from './routes/login/login.routes';
 
 const main = async () => {
     config();
@@ -12,6 +12,7 @@ const main = async () => {
     await PostgresClient.connect();
 
     app.use(userRoutes);
+    app.use(loginRoutes);
 
     const port = process.env.PORT || 8000;
     app.listen(port, () => {
