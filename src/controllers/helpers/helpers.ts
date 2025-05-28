@@ -1,4 +1,5 @@
 import { HttpResponse, HttpStatusCode } from "../protocols";
+import { Response } from 'express';
 
 export const created = <T>(body: any): HttpResponse<T> => ({
     statusCode: HttpStatusCode.CREATED,
@@ -25,6 +26,10 @@ export const notFound = (message: string): HttpResponse<string> => {
         body: message
 
     };
+};
+
+export const unauthorized = (res: Response): void => {
+    res.status(401).send({ message: "Acesso não autorizado." });
 };
 
 export const serverError = (): HttpResponse<string> => {
