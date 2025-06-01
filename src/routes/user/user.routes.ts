@@ -9,11 +9,11 @@ import { PostgresDeleteUserRepository } from "../../repositories/user/delete-use
 import { DeleteUserController } from "../../controllers/user/delete-user/delete-user";
 import { PostgresGetUserByIdRepository } from "../../repositories/user/get-user-by-id/postgres-get-user-by-id";
 import { GetUserByIdController } from "../../controllers/user/get-user-by-id/get-user-by-id";
-import { authMiddleware } from "../../middleware/auth-middleware";
+
 
 const router = Router();
 
-router.get('/users', authMiddleware, async (req, res) => {
+router.get('/users', async (req, res) => {
     const postgresGetUsersRepository = new PostgresGetUsersRepository();
     const getUsersController = new GetUsersController(postgresGetUsersRepository);
 

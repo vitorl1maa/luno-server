@@ -10,11 +10,13 @@ export interface AuthenticatedRequest extends Request {
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
 export const authMiddleware = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
+    const token = req.header('Authorization')?.replace('Bearer ', '').trim();
 
     if (!token) {
         return unauthorized(res)
     }
+
+
 
     try {
         const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };

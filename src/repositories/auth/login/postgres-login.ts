@@ -18,7 +18,7 @@ export class PostgresLoginRepository implements ILoginRepository {
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (!passwordMatch) {
-            throw new Error('Senha incorreta')
+            throw new Error('Senha incorreta ou email incorreto')
         }
 
         const token = jwt.sign(
