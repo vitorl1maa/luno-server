@@ -12,7 +12,7 @@ export const success = <T>(body: any): HttpResponse<T> => ({
     body
 });
 
-export const badRequest = (message: string): HttpResponse<string> => {
+export const badRequest = <T = string>(message: T): HttpResponse<T> => {
     return {
         statusCode: HttpStatusCode.BAD_REQUEST,
         body: message

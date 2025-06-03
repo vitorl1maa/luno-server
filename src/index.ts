@@ -13,7 +13,7 @@ const main = async () => {
     await PostgresClient.connect();
 
     app.use(authRoutes);
-    app.use(authMiddleware);
+    // app.use(authMiddleware);
     app.use(userRoutes);
 
     const port = process.env.PORT || 8000;
