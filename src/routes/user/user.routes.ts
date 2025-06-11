@@ -33,15 +33,6 @@ router.get('/users/:id', async (req, res) => {
     res.status(statusCode).send(body)
 })
 
-router.post('/users', async (req, res) => {
-    const postgresCreateUserRepository = new PostgresCreateUserRepository();
-    const createUserController = new CreateUserController(postgresCreateUserRepository);
-
-    const { body, statusCode } = await createUserController.handle({ body: req.body });
-
-    res.status(statusCode).send(body);
-});
-
 router.patch('/users/:id', async (req, res) => {
     const postgresUpdateUserRepository = new PostgresUpdateUserRepository();
     const updateUserController = new UpdateUserController(postgresUpdateUserRepository);

@@ -3,17 +3,21 @@ import { config } from 'dotenv'
 import { PostgresClient } from './database/postgres';
 import userRoutes from './routes/user/user.routes';
 import authRoutes from './routes/auth/auth.routes';
-import { authMiddleware } from './middleware/auth-middleware';
+import { authMiddleware } from './middlewares/auth-middleware';
+import { checkCors, corsMiddleware } from './middlewares/cors-middleware';
 
 const main = async () => {
     config();
     const app = express();
     app.use(express.json());
 
+    app.use(corsMiddleware);
+    app.use(checkCors);
+
     await PostgresClient.connect();
 
     app.use(authRoutes);
-    // app.use(authMiddleware);
+    app.use(authMiddleware);
     app.use(userRoutes);
 
     const port = process.env.PORT || 8000;
