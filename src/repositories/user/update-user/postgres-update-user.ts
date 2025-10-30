@@ -13,10 +13,13 @@ export class PostgresUpdateUserRepository implements IUpdateUserRepository {
             throw new Error('User not updated');
         }
 
-        const updateUser = await prisma.user.update({
+        const updatedUser = await prisma.user.update({
             where: { id: Number(id) },
             data: { ...params, }
         })
-        return updateUser as User;
+
+        const { password: _, ...userWithoutPassword } = updatedUser;
+
+        return userWithoutPassword as User;
     }
 }

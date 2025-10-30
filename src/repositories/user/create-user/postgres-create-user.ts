@@ -18,8 +18,9 @@ export class PostgresCreateUserRepository implements ICreateUserRepository {
                 },
             });
 
+            const { password: _, ...userWithoutPassword } = user;
 
-            return user
+            return userWithoutPassword as User
 
         } catch (error: any) {
             console.error("Erro ao criar usuário:", error);
