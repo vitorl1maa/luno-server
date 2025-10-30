@@ -12,11 +12,13 @@ export interface AuthenticatedRequest extends Request {
     userId?: number;
 }
 
-const JWT_SECRET = process.env.JWT_SECRET;
-
-if (!JWT_SECRET) {
-    throw new Error('JWT_SECRET não está definido nas variáveis de ambiente');
-}
+const getJwtSecret = (): string => {
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+        throw new Error('JWT_SECRET não está definido nas variáveis de ambiente');
+    }
+    return secret;
+};
 
 export const authMiddleware = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     const authHeader = req.header('Authorization');
@@ -32,7 +34,7 @@ export const authMiddleware = (req: AuthenticatedRequest, res: Response, next: N
     }
 
     try {
-        const decoded = jwt.verify(token, JWT_SECRET) as JwtPayload;
+        const decoded = jwt.verify(token, getJwtSecret()) as JwtPayload;
 
         if (!decoded.userId) {
             return unauthorized(res);

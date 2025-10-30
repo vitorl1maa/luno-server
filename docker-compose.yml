@@ -1,11 +1,13 @@
+version: "3.9"
+
 services:
   postgres:
-    image: postgres
-    container_name: stock_box
+    image: postgres:17
+    container_name: luno_db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: stock_box
+      POSTGRES_DB: luno_db
     ports:
       - "5432:5432"
     volumes:

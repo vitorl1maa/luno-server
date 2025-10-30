@@ -129,7 +129,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/vitor/Projetos/Stock Box/stock-box-backend/src/generated/prisma",
+      "value": "/home/vitor/Projetos/luno-server/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -143,7 +143,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/vitor/Projetos/Stock Box/stock-box-backend/prisma/schema.prisma",
+    "sourceFilePath": "/home/vitor/Projetos/luno-server/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -161,7 +161,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:admin@localhost:5432/postgres"
+        "value": "postgresql://postgres:admin@localhost:5432/luno_db"
       }
     }
   },
