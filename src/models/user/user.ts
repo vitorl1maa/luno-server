@@ -3,8 +3,8 @@ export interface User {
     firstName: string;
     lastName: string;
     email: string;
-    cpf: string;
-    phone?: string;
+    gender: "MALE" | "FEMALE" | "OTHER";
+    phone: string;
     password?: string;
     createdAt: Date;
     updatedAt: Date;

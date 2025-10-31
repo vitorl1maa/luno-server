@@ -20,6 +20,24 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const Gender: {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  OTHER: 'OTHER'
+};
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
+}
+
+export type Gender = $Enums.Gender
+
+export const Gender: typeof $Enums.Gender
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -894,7 +912,7 @@ export namespace Prisma {
     firstName: string | null
     lastName: string | null
     email: string | null
-    cpf: string | null
+    gender: $Enums.Gender | null
     phone: string | null
     password: string | null
     createdAt: Date | null
@@ -906,7 +924,7 @@ export namespace Prisma {
     firstName: string | null
     lastName: string | null
     email: string | null
-    cpf: string | null
+    gender: $Enums.Gender | null
     phone: string | null
     password: string | null
     createdAt: Date | null
@@ -918,7 +936,7 @@ export namespace Prisma {
     firstName: number
     lastName: number
     email: number
-    cpf: number
+    gender: number
     phone: number
     password: number
     createdAt: number
@@ -940,7 +958,7 @@ export namespace Prisma {
     firstName?: true
     lastName?: true
     email?: true
-    cpf?: true
+    gender?: true
     phone?: true
     password?: true
     createdAt?: true
@@ -952,7 +970,7 @@ export namespace Prisma {
     firstName?: true
     lastName?: true
     email?: true
-    cpf?: true
+    gender?: true
     phone?: true
     password?: true
     createdAt?: true
@@ -964,7 +982,7 @@ export namespace Prisma {
     firstName?: true
     lastName?: true
     email?: true
-    cpf?: true
+    gender?: true
     phone?: true
     password?: true
     createdAt?: true
@@ -1063,7 +1081,7 @@ export namespace Prisma {
     firstName: string
     lastName: string
     email: string
-    cpf: string
+    gender: $Enums.Gender
     phone: string
     password: string
     createdAt: Date
@@ -1094,7 +1112,7 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     email?: boolean
-    cpf?: boolean
+    gender?: boolean
     phone?: boolean
     password?: boolean
     createdAt?: boolean
@@ -1106,7 +1124,7 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     email?: boolean
-    cpf?: boolean
+    gender?: boolean
     phone?: boolean
     password?: boolean
     createdAt?: boolean
@@ -1118,7 +1136,7 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     email?: boolean
-    cpf?: boolean
+    gender?: boolean
     phone?: boolean
     password?: boolean
     createdAt?: boolean
@@ -1130,14 +1148,14 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     email?: boolean
-    cpf?: boolean
+    gender?: boolean
     phone?: boolean
     password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "cpf" | "phone" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "gender" | "phone" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
@@ -1147,7 +1165,7 @@ export namespace Prisma {
       firstName: string
       lastName: string
       email: string
-      cpf: string
+      gender: $Enums.Gender
       phone: string
       password: string
       createdAt: Date
@@ -1579,7 +1597,7 @@ export namespace Prisma {
     readonly firstName: FieldRef<"User", 'String'>
     readonly lastName: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
-    readonly cpf: FieldRef<"User", 'String'>
+    readonly gender: FieldRef<"User", 'Gender'>
     readonly phone: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
@@ -1969,7 +1987,7 @@ export namespace Prisma {
     firstName: 'firstName',
     lastName: 'lastName',
     email: 'email',
-    cpf: 'cpf',
+    gender: 'gender',
     phone: 'phone',
     password: 'password',
     createdAt: 'createdAt',
@@ -2029,6 +2047,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Gender'
+   */
+  export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
+    
+
+
+  /**
+   * Reference to a field of type 'Gender[]'
+   */
+  export type ListEnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -2067,7 +2099,7 @@ export namespace Prisma {
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
-    cpf?: StringFilter<"User"> | string
+    gender?: EnumGenderFilter<"User"> | $Enums.Gender
     phone?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -2079,7 +2111,7 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     email?: SortOrder
-    cpf?: SortOrder
+    gender?: SortOrder
     phone?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
@@ -2089,24 +2121,24 @@ export namespace Prisma {
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     email?: string
-    cpf?: string
     phone?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
+    gender?: EnumGenderFilter<"User"> | $Enums.Gender
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-  }, "id" | "email" | "cpf" | "phone">
+  }, "id" | "email" | "phone">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     email?: SortOrder
-    cpf?: SortOrder
+    gender?: SortOrder
     phone?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
@@ -2126,7 +2158,7 @@ export namespace Prisma {
     firstName?: StringWithAggregatesFilter<"User"> | string
     lastName?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
-    cpf?: StringWithAggregatesFilter<"User"> | string
+    gender?: EnumGenderWithAggregatesFilter<"User"> | $Enums.Gender
     phone?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -2137,7 +2169,7 @@ export namespace Prisma {
     firstName: string
     lastName: string
     email: string
-    cpf: string
+    gender?: $Enums.Gender
     phone: string
     password: string
     createdAt?: Date | string
@@ -2149,7 +2181,7 @@ export namespace Prisma {
     firstName: string
     lastName: string
     email: string
-    cpf: string
+    gender?: $Enums.Gender
     phone: string
     password: string
     createdAt?: Date | string
@@ -2160,7 +2192,7 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    cpf?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2172,7 +2204,7 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    cpf?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2184,7 +2216,7 @@ export namespace Prisma {
     firstName: string
     lastName: string
     email: string
-    cpf: string
+    gender?: $Enums.Gender
     phone: string
     password: string
     createdAt?: Date | string
@@ -2195,7 +2227,7 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    cpf?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2207,7 +2239,7 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    cpf?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     phone?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2240,6 +2272,13 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type EnumGenderFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderFilter<$PrismaModel> | $Enums.Gender
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2256,7 +2295,7 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     email?: SortOrder
-    cpf?: SortOrder
+    gender?: SortOrder
     phone?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
@@ -2272,7 +2311,7 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     email?: SortOrder
-    cpf?: SortOrder
+    gender?: SortOrder
     phone?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
@@ -2284,7 +2323,7 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     email?: SortOrder
-    cpf?: SortOrder
+    gender?: SortOrder
     phone?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
@@ -2329,6 +2368,16 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type EnumGenderWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderWithAggregatesFilter<$PrismaModel> | $Enums.Gender
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGenderFilter<$PrismaModel>
+    _max?: NestedEnumGenderFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2345,6 +2394,10 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type EnumGenderFieldUpdateOperationsInput = {
+    set?: $Enums.Gender
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -2382,6 +2435,13 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedEnumGenderFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderFilter<$PrismaModel> | $Enums.Gender
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -2437,6 +2497,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedEnumGenderWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderWithAggregatesFilter<$PrismaModel> | $Enums.Gender
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGenderFilter<$PrismaModel>
+    _max?: NestedEnumGenderFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {

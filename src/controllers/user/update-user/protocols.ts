@@ -4,6 +4,8 @@ export interface UpdateUserParams {
     firstName?: string;
     lastName?: string;
     email?: string;
+    phone?: string;
+    gender?: "MALE" | "FEMALE" | "OTHER";
     password?: string;
 }
 

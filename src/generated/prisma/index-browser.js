@@ -125,7 +125,7 @@ exports.Prisma.UserScalarFieldEnum = {
   firstName: 'firstName',
   lastName: 'lastName',
   email: 'email',
-  cpf: 'cpf',
+  gender: 'gender',
   phone: 'phone',
   password: 'password',
   createdAt: 'createdAt',
@@ -141,7 +141,11 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
-
+exports.Gender = exports.$Enums.Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  OTHER: 'OTHER'
+};
 
 exports.Prisma.ModelName = {
   User: 'User'
