@@ -10,7 +10,7 @@ export class PostgresUpdateUserRepository implements IUpdateUserRepository {
         const user = await prisma.user.findUnique({ where: { id: Number(id) } });
 
         if (!user) {
-            throw new Error('User not updated');
+            throw new Error('User not found');
         }
 
         const updatedUser = await prisma.user.update({

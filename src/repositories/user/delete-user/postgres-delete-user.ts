@@ -13,12 +13,12 @@ export class PostgresDeleteUserRepository implements IDeleteUserRepository {
             return deleteUser as User;
         } catch (error) {
             if (error instanceof Prisma.PrismaClientKnownRequestError) {
-                // Código P2025 → Registro não encontrado
+                // Code P2025 → Record not found
                 if (error.code === 'P2025') {
-                    throw new Error(`User with id ${id} does not exist.`)
+                    throw new Error('User not found')
                 }
             }
-            throw new Error('Falied to delete user' + (error as Error).message)
+            throw new Error('Failed to delete user: ' + (error as Error).message)
         }
     }
 }

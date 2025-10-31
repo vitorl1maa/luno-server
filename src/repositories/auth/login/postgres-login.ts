@@ -12,13 +12,13 @@ export class PostgresLoginRepository implements ILoginRepository {
         });
 
         if (!user) {
-            throw new Error("Usuário não encontrado");
+            throw new Error("User not found");
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (!passwordMatch) {
-            throw new Error('Senha incorreta ou email incorreto')
+            throw new Error('Incorrect password or email')
         }
 
         const token = jwt.sign(

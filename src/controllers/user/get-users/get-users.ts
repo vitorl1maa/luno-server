@@ -1,5 +1,5 @@
 import { User } from "../../../models/user/user";
-import { serverError, success } from "../../helpers/helpers";
+import { ErrorResponse, serverError, success } from "../../helpers/helpers";
 import { HttpResponse, IController } from "../../protocols";
 import { IGetUsersRepository } from "./protocols";
 
@@ -8,7 +8,7 @@ export class GetUsersController implements IController {
 
     }
 
-    async handle(): Promise<HttpResponse<User[] | string>> {
+    async handle(): Promise<HttpResponse<User[] | ErrorResponse>> {
         try {
             //validar req
             // direciona chamada para repository
